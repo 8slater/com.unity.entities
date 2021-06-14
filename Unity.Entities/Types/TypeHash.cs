@@ -143,7 +143,11 @@ namespace Unity.Entities
                 hash = CombineFNV1A64(hash, FNV1A64(type.DeclaringType.Name));
             }
             else if (!string.IsNullOrEmpty(type.Namespace))
+            {
                 hash = CombineFNV1A64(hash, FNV1A64(type.Namespace));
+                //TODO: remove it. It's workaround for terrain tools
+                hash = CombineFNV1A64(hash, FNV1A64(type.Assembly.GetName().Name));
+            }
 
             return hash;
         }
